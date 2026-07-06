@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Logo from "../assets/Logo_ANAPORA.png";
 import { Link } from "react-router-dom";
 import fotoMulher from "../assets/FotoMulher.jpeg";
 import { api } from "../services/api";
@@ -57,9 +58,12 @@ export default function Cadastro() {
 
         <div className="card">
 
-          <div className="logo-text">
-            <h2>ANA</h2>
-            <span>PORÃ</span>
+          <div style={{ textAlign: "center", marginBottom: "20px" }}>
+            <img
+              src={Logo}
+              alt="Logo"
+              style={{ width: "120px", height: "auto", objectFit: "contain" }}
+            />
           </div>
 
           <h1>Cadastro</h1>
@@ -113,7 +117,7 @@ export default function Cadastro() {
           <p>
             Já possui conta?
             {" "}
-            <Link to="/">
+            <Link to="/login">
               Entrar
             </Link>
           </p>
