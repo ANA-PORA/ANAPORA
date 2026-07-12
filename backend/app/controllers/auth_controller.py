@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.services import auth_service
 
-from app.schemas.usuario_shema import (
+from app.schemas.usuario_schema import (
     UsuarioCreate,
     UsuarioLogin,
     Token

@@ -86,3 +86,26 @@ def get_current_user(
         raise credentials_exception
 
     return usuario
+
+def get_current_admin(
+    usuario=Depends(get_current_user)
+):
+    if usuario.role != "admin":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Acesso negado"
+        )
+
+    return usuario
+
+
+def get_current_artesao(
+    usuario=Depends(get_current_user)
+):
+    if usuario.role != "artesao":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Acesso negado"
+        )
+
+    return usuario

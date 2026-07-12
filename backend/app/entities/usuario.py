@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String
 from app.core.database import Base
+from sqlalchemy.orm import relationship
 
 class Usuario(Base):
 
@@ -11,3 +12,4 @@ class Usuario(Base):
     senha = Column(String, nullable=False)
     role = Column(String, default="cliente")
     status = Column(String, default="pendente")
+    produtos = relationship("Produto", back_populates="artesao")
