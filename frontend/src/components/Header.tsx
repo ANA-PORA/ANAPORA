@@ -2,7 +2,7 @@ import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FiLogOut, FiSearch, FiShoppingCart, FiUser } from "react-icons/fi";
 
-import Logo from "../assets/Logo_ANAPORA.png";
+import Logo from "../assets/logo-branca.png";
 
 import { useAuth } from "../hooks/useAuth";
 
@@ -56,7 +56,7 @@ export default function Header() {
 
                         <input
                             type="text"
-                            placeholder="Buscar biojoias, sementes, penas..."
+                            placeholder="Buscar Brinco de Arara..."
                             value={busca}
                             onChange={(e) => setBusca(e.target.value)}
                             onKeyDown={(e) => {

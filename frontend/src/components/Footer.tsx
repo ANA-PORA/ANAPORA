@@ -9,7 +9,7 @@ import {
   FiShield,
   FiCreditCard,
 } from "react-icons/fi";
-import Logo from "../assets/Logo_ANAPORA.png";
+import Logo from "../assets/logo-branca.png";
 import "../styles/Footer.css";
 
 export default function Footer() {
@@ -113,7 +113,7 @@ export default function Footer() {
               <div>
                 <strong>Formas de Pagamento</strong>
                 <span>
-                  Pix • Cartão • Boleto • Parcelamento
+                  Pix • Cartão (Parcelamento até 4x sem juros)
                 </span>
               </div>
             </div>
@@ -122,8 +122,6 @@ export default function Footer() {
               <span>Visa</span>
               <span>Master</span>
               <span>Pix</span>
-              <span>Boleto</span>
-              <span>Amex</span>
             </div>
 
           </div>
@@ -155,7 +153,7 @@ export default function Footer() {
         <div className="container footer-bottom-content">
 
           <span>
-            © 2025 Añaporã Biojoias Amazônicas. Todos os direitos reservados.
+            © 2026 Añaporã Biojoias Amazônicas. Todos os direitos reservados.
           </span>
 
           <span>

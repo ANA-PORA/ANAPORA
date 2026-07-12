@@ -1,0 +1,202 @@
+:root{
+    --artesao-green:#234f19;
+    --artesao-green-dark:#183b10;
+    --artesao-green-light:#edf5ea;
+    --artesao-orange:#d88908;
+    --artesao-background:#f5f6f3;
+    --artesao-text:#252525;
+    --artesao-muted:#747474;
+    --artesao-sidebar-width:280px;
+}
+.artesao-layout{
+    min-height:100vh;
+    background:var(--artesao-background);
+}
+.artesao-sidebar{
+    position:fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    width:var(--artesao-sidebar-width);
+    display:flex;
+    flex-direction:column;
+    background:linear-gradient(180deg,var(--artesao-green) 0%,var(--artesao-green-dark) 100%);
+    color:#fff;
+    z-index:1100;
+    box-shadow:5px 0 20px rgba(0,0,0,.12);
+}
+.artesao-sidebar-header{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:38px 24px 30px;
+    border-bottom:1px solid rgba(255,255,255,.12);
+}
+.artesao-sidebar-header strong{
+    margin-top:14px;
+    font-size:1.1rem;
+}
+.artesao-sidebar-header span{
+    margin-top:4px;
+    color:rgba(255,255,255,.68);
+    font-size:.85rem;
+}
+.artesao-profile-image,
+.artesao-profile-fallback{
+    width:84px;
+    height:84px;
+    border-radius:50%;
+    border:3px solid rgba(255,255,255,.8);
+    box-shadow:0 6px 18px rgba(0,0,0,.2);
+}
+.artesao-profile-image{
+    object-fit:cover;
+}
+.artesao-profile-fallback{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#fff;
+    color:var(--artesao-green);
+    font-size:2rem;
+    font-weight:700;
+}
+.artesao-sidebar-close{
+    display:none;
+    position:absolute;
+    top:15px;
+    right:15px;
+    border:0;
+    background:transparent;
+    color:#fff;
+    font-size:1.5rem;
+}
+.artesao-sidebar-nav{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    padding:24px 16px;
+}
+.artesao-sidebar-nav a{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    min-height:48px;
+    padding:0 16px;
+    border-radius:12px;
+    color:rgba(255,255,255,.8);
+    text-decoration:none;
+    font-weight:500;
+    transition:.2s;
+}
+.artesao-sidebar-nav a svg{
+    flex-shrink:0;
+    font-size:1.25rem;
+}
+.artesao-sidebar-nav a:hover{
+    background:rgba(255,255,255,.1);
+    color:#fff;
+    transform:translateX(3px);
+}
+.artesao-sidebar-nav a.active{
+    background:#fff;
+    color:var(--artesao-green);
+    font-weight:700;
+}
+.artesao-logout{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    min-height:50px;
+    margin:0 16px 24px;
+    padding:0 16px;
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:12px;
+    background:transparent;
+    color:#fff;
+    font-weight:600;
+    transition:.2s;
+}
+.artesao-logout:hover{
+    background:rgba(255,255,255,.12);
+}
+.artesao-main{
+    min-height:100vh;
+    margin-left:var(--artesao-sidebar-width);
+}
+.artesao-content{
+    max-width:1500px;
+    margin:0 auto;
+    padding:36px;
+}
+.artesao-mobile-header{
+    display:none;
+}
+.artesao-overlay{
+    display:none;
+}
+.artesao-auth-check{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+@media(max-width:992px){
+    .artesao-sidebar{
+        transform:translateX(-100%);
+        transition:transform .25s ease;
+    }
+    .artesao-sidebar-open{
+        transform:translateX(0);
+    }
+    .artesao-sidebar-close{
+        display:flex;
+    }
+    .artesao-main{
+        margin-left:0;
+    }
+    .artesao-mobile-header{
+        position:sticky;
+        top:0;
+        z-index:1000;
+        height:64px;
+        display:flex;
+        align-items:center;
+        gap:15px;
+        padding:0 22px;
+        background:#fff;
+        box-shadow:0 2px 10px rgba(0,0,0,.08);
+        color:var(--artesao-green);
+        font-weight:700;
+    }
+    .artesao-mobile-header button{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        border:0;
+        background:transparent;
+        color:var(--artesao-green);
+        font-size:1.6rem;
+    }
+    .artesao-overlay{
+        position:fixed;
+        inset:0;
+        z-index:1090;
+        display:block;
+        border:0;
+        background:rgba(0,0,0,.48);
+    }
+    .artesao-content{
+        padding:25px 20px;
+    }
+}
+@media(max-width:576px){
+    :root{
+        --artesao-sidebar-width:265px;
+    }
+    .artesao-content{
+        padding:20px 14px;
+    }
+}

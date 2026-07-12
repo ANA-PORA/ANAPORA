@@ -37,7 +37,6 @@ export default function Navbar() {
                 aria-expanded="false"
               >
                 Categorias
-                <FiChevronDown />
               </button>
 
               <ul className="dropdown-menu shadow border-0">
