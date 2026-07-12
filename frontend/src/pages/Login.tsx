@@ -1,93 +1,101 @@
 import { useState } from "react";
-import Logo from "../assets/Logo_ANAPORA.png";
+import type { ChangeEvent, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import fotoMulher from "../assets/FotoMulher.jpeg";
+import axios from "axios";
+import AuthLayout from "../components/AuthLayout";
 import { api } from "../services/api";
 
 export default function Login() {
   const navigate = useNavigate();
-
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const [loading, setLoading] = useState(false);
+  const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
 
-  async function login() {
+  const handleSenha = (e: ChangeEvent<HTMLInputElement>) => {
+    setSenha(e.target.value);
+  };
+
+  async function handleLogin(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    if (!email.trim() || !senha.trim()) {
+      alert("Preencha todos os campos.");
+      return;
+    }
+
     try {
-      setLoading(true);
-
       const response = await api.post("/auth/login", {
         email,
         senha,
       });
 
-      localStorage.setItem("token", response.data.access_token);
+      localStorage.setItem(
+        "token",
+        response.data.access_token
+      );
 
       navigate("/");
-    } catch (error: any) {
-      alert(
-        error.response?.data?.detail ||
-          "Erro ao fazer login"
-      );
-    } finally {
-      setLoading(false);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        alert(
+          error.response?.data?.detail ??
+            "Erro ao fazer login."
+        );
+      } else {
+        alert("Erro inesperado.");
+      }
     }
   }
 
   return (
-    <div className="container">
-      
-      <div className="left-side">
-        <img src={fotoMulher} alt="banner" />
-      </div>
+    <AuthLayout
+      title="Iniciar Sessão"
+      footer={
+        <p className="auth-footer">
+          Não possui conta?
+          <Link to="/cadastro">Cadastre-se</Link>
+        </p>
+      }
+    >
+      <form onSubmit={handleLogin}>
 
-      <div className="right-side">
+        <div className="mb-3">
 
-        <nav>
-          <a href="#">Página Inicial</a>
-          <a href="#">Fale Conosco</a>
-          <a href="#">Sobre Nós</a>
-        </nav>
-
-        <div className="card">
-
-          <div style={{ textAlign: "center", marginBottom: "20px" }}>
-            <img
-              src={Logo}
-              alt="Logo"
-              style={{ width: "120px", height: "auto", objectFit: "contain" }}
-            />
-          </div>
-
-          <h1>Iniciar Sessão</h1>
+          <label>Email</label>
 
           <input
             type="email"
-            placeholder="Email"
+            className="form-control"
+            placeholder="Digite seu email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleEmail}
           />
+
+        </div>
+
+        <div className="mb-4">
+
+          <label>Senha</label>
 
           <input
             type="password"
-            placeholder="Senha"
+            className="form-control"
+            placeholder="Digite sua senha"
             value={senha}
-            onChange={(e) => setSenha(e.target.value)}
+            onChange={handleSenha}
           />
-
-          <button onClick={login} disabled={loading}>
-            {loading ? "Entrando..." : "Login"}
-          </button>
-
-          <p>
-            Não tem conta?{" "}
-            <Link to="/cadastro">
-              Cadastre-se
-            </Link>
-          </p>
-
         </div>
-      </div>
 
-    </div>
+        <button
+          className="btn btn-success w-100"
+          type="submit"
+        >
+          Entrar
+        </button>
+
+      </form>
+    </AuthLayout>
   );
 }

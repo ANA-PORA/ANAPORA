@@ -1,105 +1,137 @@
 import { useState } from "react";
-import Logo from "../assets/Logo_ANAPORA.png";
-import { Link } from "react-router-dom";
-import fotoMulher from "../assets/FotoMulher.jpeg";
+import type {ChangeEvent, FormEvent} from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import AuthLayout from "../components/AuthLayout";
 import { api } from "../services/api";
 
 export default function Cadastro() {
+  const navigate = useNavigate();
 
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [role, setRole] = useState("cliente");
 
-  async function cadastrar() {
-    try {
+  const handleNome = (
+    e: ChangeEvent<HTMLInputElement>
+  ) => {
+    setNome(e.target.value);
+  };
 
-      const response = await api.post(
-        "/auth/registrar",
-        {
-          nome,
-          email,
-          senha,
-          role
-        }
-      );
+  const handleEmail = (
+    e: ChangeEvent<HTMLInputElement>
+  ) => {
+    setEmail(e.target.value);
+  };
+
+  const handleSenha = (
+    e: ChangeEvent<HTMLInputElement>
+  ) => {
+    setSenha(e.target.value);
+  };
+
+  const handleRole = (
+    e: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setRole(e.target.value);
+  };
+
+  async function handleCadastro(
+    e: FormEvent<HTMLFormElement>
+  ) {
+    e.preventDefault();
+
+    if (
+      !nome.trim() ||
+      !email.trim() ||
+      !senha.trim()
+    ) {
+      alert("Preencha todos os campos.");
+      return;
+    }
+
+    try {
+      await api.post("/auth/registrar", {
+        nome,
+        email,
+        senha,
+        role,
+      });
 
       alert("Cadastro realizado com sucesso!");
 
-      localStorage.setItem(
-        "token",
-        response.data.access_token
-      );
+      navigate("/login");
 
-    } catch (error: any) {
-
-      alert(
-        error.response?.data?.detail ||
-        "Erro ao cadastrar"
-      );
-
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        alert(
+          error.response?.data?.detail ??
+            "Erro ao cadastrar."
+        );
+      } else {
+        alert("Erro inesperado.");
+      }
     }
   }
 
   return (
-    <div className="container">
+    <AuthLayout
+      title="Cadastro"
+      footer={
+        <p className="auth-footer">
+          Já possui conta?
+          <Link to="/login">Entrar</Link>
+        </p>
+      }
+    >
+      <form onSubmit={handleCadastro}>
 
-      <div className="left-side">
-        <img src={fotoMulher} alt="Biojoias" />
-      </div>
-
-      <div className="right-side">
-
-        <nav>
-          <a href="#">Página inicial</a>
-          <a href="#">Fale conosco</a>
-          <a href="#">Sobre nós</a>
-        </nav>
-
-        <div className="card">
-
-          <div style={{ textAlign: "center", marginBottom: "20px" }}>
-            <img
-              src={Logo}
-              alt="Logo"
-              style={{ width: "120px", height: "auto", objectFit: "contain" }}
-            />
-          </div>
-
-          <h1>Cadastro</h1>
-
+        <div className="mb-3">
+          <label>Nome</label>
           <input
             type="text"
-            placeholder="Nome"
+            className="form-control"
+            placeholder="Digite seu nome"
             value={nome}
-            onChange={(e) =>
-              setNome(e.target.value)
-            }
+            onChange={handleNome}
           />
+
+        </div>
+
+        <div className="mb-3">
+
+          <label>Email</label>
 
           <input
             type="email"
-            placeholder="Email"
+            className="form-control"
+            placeholder="Digite seu email"
             value={email}
-            onChange={(e) =>
-              setEmail(e.target.value)
-            }
+            onChange={handleEmail}
           />
 
+        </div>
+        <div className="mb-3">
+          <label>Senha</label>
           <input
             type="password"
-            placeholder="Senha"
+            className="form-control"
+            placeholder="Digite sua senha"
             value={senha}
-            onChange={(e) =>
-              setSenha(e.target.value)
-            }
+            onChange={handleSenha}
           />
 
+        </div>
+
+        <div className="mb-4">
+
+          <label>Tipo de conta</label>
+
           <select
+            className="form-control"
             value={role}
-            onChange={(e) =>
-              setRole(e.target.value)
-            }
+            onChange={handleRole}
           >
             <option value="cliente">
               Cliente
@@ -108,24 +140,19 @@ export default function Cadastro() {
             <option value="artesao">
               Artesão
             </option>
+
           </select>
-
-          <button onClick={cadastrar}>
-            Cadastrar
-          </button>
-
-          <p>
-            Já possui conta?
-            {" "}
-            <Link to="/login">
-              Entrar
-            </Link>
-          </p>
 
         </div>
 
-      </div>
+        <button
+          className="btn btn-success w-100"
+          type="submit"
+        >
+          Cadastrar
+        </button>
 
-    </div>
+      </form>
+    </AuthLayout>
   );
 }
