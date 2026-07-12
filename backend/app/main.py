@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.controllers.auth_controller import router as auth_router
+from app.controllers import auth_router, categoria_router
+from app.controllers.produto_controller import router as produto_router
 from app.core.database import Base, engine
-from app.entities.usuario import Usuario
-
+from app.entities import Usuario, Categoria
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -20,7 +20,8 @@ app.add_middleware(
 )
 
 app.include_router(auth_router)
-
+app.include_router(categoria_router)
+app.include_router(produto_router)
 
 @app.get("/")
 def root():
