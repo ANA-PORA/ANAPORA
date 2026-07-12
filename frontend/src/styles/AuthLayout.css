@@ -1,0 +1,251 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    min-height:100%;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#0d0d0d;
+    overflow-y:auto;
+}
+
+.auth-container{
+    display:flex;
+    width:100%;
+    min-height:100vh;
+}
+
+.auth-left{
+    width:55%;
+    position:relative;
+    background-image:url("../assets/FotoMulher.jpeg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+}
+
+.auth-left::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        90deg,
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,.08) 35%,
+        rgba(0,0,0,.18) 55%,
+        rgba(0,0,0,.38) 72%,
+        rgba(0,0,0,.65) 88%,
+        #0d0d0d 100%
+    );
+}
+
+.auth-right{
+    width:45%;
+    background:#0d0d0d;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:40px 0;
+    overflow-y:auto;
+}
+
+.auth-navbar{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    gap:45px;
+    padding:40px 0;
+    font-size:20px;
+}
+
+.auth-navbar a{
+    position:relative;
+    color:#ffffff;
+    text-decoration:none;
+    font-weight:500;
+    transition:color .3s ease;
+}
+
+.auth-navbar a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-6px;
+    width:0;
+    height:2px;
+    background:#7ebc68;
+    transition:width .3s ease;
+}
+
+.auth-navbar a:hover{
+    color:#7ebc68;
+}
+
+.auth-navbar a:hover::after{
+    width:100%;
+}
+
+.auth-navbar a.active{
+    color:#7ebc68;
+}
+
+.auth-navbar a.active::after{
+    width:100%;
+}
+
+.auth-card{
+    width:min(470px,92%);
+    background:#fff;
+    border-radius:35px;
+    padding:45px;
+    margin-bottom:40px;
+    box-shadow:0 15px 40px rgba(0,0,0,.35);
+}
+
+.logo{
+    display:block;
+    margin:auto;
+    width:110px;
+    margin-bottom:15px;
+}
+
+.auth-card h1{
+    text-align:center;
+    color:#1c5e24;
+    font-size:38px;
+    margin-bottom:35px;
+    font-weight:700;
+}
+
+.auth-card form{
+    width:100%;
+}
+
+.auth-card label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+}
+
+.form-control{
+    width:100%;
+    height:54px;
+    border:none;
+    border-radius:30px;
+    background:#ececec;
+    padding:0 20px;
+    margin-bottom:20px;
+    font-size:15px;
+}
+
+.form-control:focus{
+    outline:none;
+    box-shadow:none;
+    border:2px solid #1d6f2b;
+}
+
+select.form-control{
+    appearance:none;
+    cursor:pointer;
+}
+
+.btn-success{
+    width:100%;
+    height:55px;
+    border:none;
+    border-radius:30px;
+    background:#1d6f2b;
+    font-size:20px;
+    font-weight:700;
+    color:#fff;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-success:hover{
+    background:#155321;
+}
+
+.auth-footer{
+    margin-top:25px;
+    text-align:center;
+    font-size:15px;
+}
+
+.auth-footer a{
+    margin-left:6px;
+    color:#1d6f2b;
+    font-weight:700;
+    text-decoration:none;
+}
+
+.auth-footer a:hover{
+    text-decoration:underline;
+}
+
+@media(max-width:992px){
+    body{
+        background:linear-gradient(
+            200deg,
+            #ebdab8 0%,
+            #d49f51 100%
+        );
+    }
+
+    .auth-left{
+        display:none;
+    }
+
+    .auth-right{
+        width:100%;
+        background:transparent;
+        padding:30px 0;
+    }
+
+    .auth-navbar a{
+        color:#1d6f2b;
+    }
+
+    .auth-card{
+        width:min(520px,92%);
+        margin-top:15px;
+    }
+
+}
+
+@media(max-width:600px){
+
+    body{
+        background:linear-gradient(
+            180deg,
+            #F8F5EF 0%,
+            #F2ECE2 100%
+        );
+    }
+
+    .auth-navbar{
+        gap:18px;
+        padding:25px 0;
+    }
+
+    .auth-navbar a{
+        font-size:14px;
+    }
+
+    .auth-card{
+        width:92%;
+        padding:30px;
+        margin-top:20px;
+    }
+
+    .auth-card h1{
+        font-size:30px;
+    }
+
+}
