@@ -7,7 +7,7 @@ Plataforma web full stack focada no e-commerce de artesanatos e biojoias amazôn
 *   **Frontend:** React.js, CSS3
 *   **Infraestrutura:** PostgreSQL, Docker Compose
 
-## 🚀 Funcionalidades (Roadmap)
+## 🚀 Funcionalidades
 - [ ] Cadastro e Autenticação
 - [ ] Catálogo de Biojoias/Artesanatos
 - [ ] Carrinho e Checkout
@@ -15,7 +15,7 @@ Plataforma web full stack focada no e-commerce de artesanatos e biojoias amazôn
 
 ## 📦 Início Rápido
 ```bash
-git clone https://github.com
+git clone https://github.com/ANA-PORA/ANAPORA.git
 cd ANAPORA
 docker-compose up -d
 ```
