@@ -1,0 +1,287 @@
+.new-product-page{
+    width:100%;
+}
+.new-product-back{
+    min-height:44px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:0 17px;
+    border:1px solid #d9dfd6;
+    border-radius:11px;
+    background:#fff;
+    color:var(--artisan-green);
+    text-decoration:none;
+    font-weight:700;
+    transition:.2s;
+}
+.new-product-back:hover{
+    border-color:var(--artisan-green);
+    color:var(--artisan-green-dark);
+}
+.new-product-form{
+    width:100%;
+}
+.new-product-grid{
+    display:grid;
+    grid-template-columns:minmax(0,1.35fr) minmax(340px,.85fr);
+    gap:24px;
+}
+.new-product-card{
+    padding:28px;
+    border:1px solid #e7ebe4;
+    border-radius:18px;
+    background:#fff;
+    box-shadow:0 8px 28px rgba(36,55,31,.06);
+}
+.new-product-card-title{
+    margin-bottom:26px;
+    padding-bottom:19px;
+    border-bottom:1px solid #edf0eb;
+}
+.new-product-card-title h2{
+    margin:0 0 6px;
+    color:#282d27;
+    font-size:1.25rem;
+    font-weight:750;
+}
+.new-product-card-title p{
+    margin:0;
+    color:var(--artisan-muted);
+    font-size:.9rem;
+}
+.new-product-card .form-label{
+    color:#41463f;
+    font-size:.9rem;
+    font-weight:700;
+}
+.new-product-card .form-control,
+.new-product-card .form-select{
+    min-height:48px;
+    border:1px solid #dce2d9;
+    border-radius:11px;
+    background:#fbfcfa;
+    box-shadow:none;
+}
+.new-product-card .form-control:focus,
+.new-product-card .form-select:focus{
+    border-color:var(--artisan-green);
+    box-shadow:0 0 0 3px rgba(35,79,25,.1);
+}
+.new-product-card small{
+    display:block;
+    margin-top:6px;
+    color:#92978f;
+    font-size:.75rem;
+}
+.new-product-description{
+    min-height:150px!important;
+    padding-top:13px!important;
+    resize:vertical;
+}
+.new-product-fields{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+.new-product-money{
+    height:48px;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+    border:1px solid #dce2d9;
+    border-radius:11px;
+    background:#fbfcfa;
+}
+.new-product-money:focus-within{
+    border-color:var(--artisan-green);
+    box-shadow:0 0 0 3px rgba(35,79,25,.1);
+}
+.new-product-money span{
+    height:100%;
+    display:flex;
+    align-items:center;
+    padding:0 13px;
+    border-right:1px solid #e1e5df;
+    background:#f1f4ef;
+    color:#62685f;
+    font-weight:700;
+}
+.new-product-money input{
+    width:100%;
+    height:100%;
+    border:0;
+    outline:0;
+    background:transparent;
+    padding:0 13px;
+}
+.new-product-upload{
+    min-height:180px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    padding:24px;
+    border:2px dashed #cad6c6;
+    border-radius:15px;
+    background:#f8fbf7;
+    color:var(--artisan-green);
+    cursor:pointer;
+    text-align:center;
+    transition:.2s;
+}
+.new-product-upload:hover{
+    border-color:var(--artisan-green);
+    background:var(--artisan-green-light);
+}
+.new-product-upload svg{
+    margin-bottom:5px;
+    font-size:2.2rem;
+}
+.new-product-upload strong{
+    font-size:.95rem;
+}
+.new-product-upload span{
+    color:#858b81;
+    font-size:.8rem;
+}
+.new-product-file-input{
+    display:none;
+}
+.new-product-image-count{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    margin:13px 0;
+    color:#868c83;
+    font-size:.76rem;
+}
+.new-product-empty-images{
+    min-height:110px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    border-radius:12px;
+    background:#f6f7f5;
+    color:#9a9f97;
+}
+.new-product-empty-images svg{
+    font-size:1.7rem;
+}
+.new-product-previews{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+.new-product-preview{
+    position:relative;
+    aspect-ratio:1;
+    overflow:hidden;
+    border:1px solid #e0e5dd;
+    border-radius:11px;
+    background:#f4f5f3;
+}
+.new-product-preview img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+.new-product-preview button{
+    position:absolute;
+    top:6px;
+    right:6px;
+    width:30px;
+    height:30px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:0;
+    border-radius:8px;
+    background:rgba(34,34,34,.75);
+    color:#fff;
+}
+.new-product-preview button:hover{
+    background:#b6372f;
+}
+.new-product-main-image{
+    position:absolute;
+    left:6px;
+    bottom:6px;
+    padding:4px 7px;
+    border-radius:6px;
+    background:var(--artisan-green);
+    color:#fff;
+    font-size:.65rem;
+    font-weight:700;
+}
+.new-product-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:12px;
+    margin-top:24px;
+}
+.new-product-cancel,
+.new-product-submit{
+    min-height:48px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    padding:0 21px;
+    border-radius:11px;
+    font-weight:700;
+    transition:.2s;
+}
+.new-product-cancel{
+    border:1px solid #d8ddd5;
+    background:#fff;
+    color:#63685f;
+    text-decoration:none;
+}
+.new-product-cancel:hover{
+    border-color:#aeb6aa;
+    color:#333;
+}
+.new-product-submit{
+    border:0;
+    background:var(--artisan-green);
+    color:#fff;
+}
+.new-product-submit:hover:not(:disabled){
+    background:var(--artisan-green-dark);
+    transform:translateY(-1px);
+}
+.new-product-submit:disabled{
+    cursor:not-allowed;
+    opacity:.6;
+}
+@media(max-width:1100px){
+    .new-product-grid{
+        grid-template-columns:1fr;
+    }
+}
+@media(max-width:650px){
+    .new-product-card{
+        padding:20px;
+        border-radius:14px;
+    }
+    .new-product-fields{
+        grid-template-columns:1fr;
+    }
+    .new-product-previews{
+        grid-template-columns:repeat(2,1fr);
+    }
+    .new-product-image-count{
+        flex-direction:column;
+    }
+    .new-product-actions{
+        flex-direction:column-reverse;
+    }
+    .new-product-cancel,
+    .new-product-submit{
+        width:100%;
+    }
+}

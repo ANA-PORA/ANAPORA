@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { FiChevronDown } from "react-icons/fi";
 import type { Categoria } from "../types/categoria";
 import { listarCategorias } from "../services/categoriaService";
 import "../styles/Navbar.css";
@@ -37,7 +36,6 @@ export default function Navbar() {
                 aria-expanded="false"
               >
                 Categorias
-                <FiChevronDown />
               </button>
 
               <ul className="dropdown-menu shadow border-0">
