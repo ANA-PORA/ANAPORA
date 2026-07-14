@@ -4,6 +4,8 @@ from app.controllers import auth_router, categoria_router
 from app.controllers.produto_controller import router as produto_router
 from app.core.database import Base, engine
 from app.entities import Usuario, Categoria
+from app.controllers import artesao_perfil
+
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -22,7 +24,7 @@ app.add_middleware(
 app.include_router(auth_router)
 app.include_router(categoria_router)
 app.include_router(produto_router)
-
+app.include_router(artesao_perfil.router)
 @app.get("/")
 def root():
     return {

@@ -27,3 +27,13 @@ export interface CriarProdutoDados {
   categoriaId: number;
   imagens: File[];
 }
+
+export interface EditarProdutoDados {
+  nome: string;
+  descricao: string;
+  preco: number;
+  estoque: number;
+  categoriaId: number;
+  destaque: boolean;
+  ativo: boolean;
+}

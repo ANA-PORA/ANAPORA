@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { FiBarChart2, FiHome, FiLogOut, FiPackage, FiPlusCircle, FiShoppingBag, FiUser, FiX } from "react-icons/fi";
-import type { Usuario } from "../types/usuario";
+import type { Usuario } from "../../types/usuario";
 
 interface ArtesaoSidebarProps {
   usuario: Usuario;
@@ -11,7 +11,6 @@ interface ArtesaoSidebarProps {
 
 export default function ArtesaoSidebar({ usuario, aberto, aoFechar, aoSair }: ArtesaoSidebarProps) {
   const primeiroNome = usuario.nome.trim().split(" ")[0];
-  const inicial = primeiroNome.charAt(0).toUpperCase();
 
   return (
     <>
@@ -21,11 +20,7 @@ export default function ArtesaoSidebar({ usuario, aberto, aoFechar, aoSair }: Ar
           <button type="button" className="artesao-sidebar-close" onClick={aoFechar} aria-label="Fechar menu">
             <FiX />
           </button>
-          {usuario.foto_url ? (
-            <img src={usuario.foto_url} alt={`Foto de ${usuario.nome}`} className="artesao-profile-image" />
-          ) : (
-            <div className="artesao-profile-fallback">{inicial}</div>
-          )}
+          
           <strong>Olá, {primeiroNome}</strong>
           <span>Área do artesão</span>
         </div>
