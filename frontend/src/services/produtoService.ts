@@ -1,6 +1,7 @@
 import { api } from "./api";
 import type {
   CriarProdutoDados,
+  EditarProdutoDados,
   Produto
 } from "../types/produto";
 
@@ -73,6 +74,31 @@ export async function criarProduto(
 
   const response = await api.post<Produto>(
     "/produtos",
+    formData
+  );
+
+  return response.data;
+}
+
+export async function atualizarProduto(
+  produtoId: number,
+  dados: EditarProdutoDados
+): Promise<Produto> {
+  const formData = new FormData();
+
+  formData.append("nome", dados.nome);
+  formData.append("descricao", dados.descricao);
+  formData.append("preco", dados.preco.toString());
+  formData.append("estoque", dados.estoque.toString());
+  formData.append(
+    "categoria_id",
+    dados.categoriaId.toString()
+  );
+  formData.append("destaque", dados.destaque.toString());
+  formData.append("ativo", dados.ativo.toString());
+
+  const response = await api.put<Produto>(
+    `/produtos/${produtoId}`,
     formData
   );
 

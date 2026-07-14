@@ -110,3 +110,18 @@ def remover(
     db.commit()
     db.refresh(produto)
     return produto
+
+def buscar_meus_produtos(
+    db: Session,
+    artesao_id: int
+) -> list[Produto]:
+    return (
+        db.query(Produto)
+        .filter(
+            Produto.artesao_id == artesao_id
+        )
+        .order_by(
+            Produto.created_at.desc()
+        )
+        .all()
+    )

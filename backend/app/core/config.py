@@ -1,22 +1,64 @@
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
 
 load_dotenv()
 
-DATABASE_URL = os.getenv("DATABASE_URL")
 
-SECRET_KEY = os.getenv("SECRET_KEY")
-ALGORITHM = os.getenv("ALGORITHM")
-ACCESS_TOKEN_EXPIRE_MINUTES = int(
-    os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES")
+def obter_variavel(
+    nome: str,
+    obrigatoria: bool = True,
+    padrao: str | None = None
+) -> str | None:
+    valor = os.getenv(nome, padrao)
+
+    if isinstance(valor, str):
+        valor = valor.strip()
+
+    if obrigatoria and not valor:
+        raise RuntimeError(
+            f"A variável de ambiente {nome} não foi configurada."
+        )
+
+    return valor
+
+
+DATABASE_URL = obter_variavel("DATABASE_URL")
+
+SECRET_KEY = obter_variavel("SECRET_KEY")
+
+ALGORITHM = obter_variavel(
+    "ALGORITHM",
+    padrao="HS256"
 )
 
-R2_ACCOUNT_ID = os.getenv("R2_ACCOUNT_ID")
+ACCESS_TOKEN_EXPIRE_MINUTES = int(
+    obter_variavel(
+        "ACCESS_TOKEN_EXPIRE_MINUTES",
+        padrao="60"
+    )
+)
 
-R2_ACCESS_KEY_ID = os.getenv("R2_ACCESS_KEY_ID")
+R2_ACCOUNT_ID = obter_variavel(
+    "R2_ACCOUNT_ID",
+    obrigatoria=False
+)
 
-R2_SECRET_ACCESS_KEY = os.getenv("R2_SECRET_ACCESS_KEY")
+R2_ACCESS_KEY_ID = obter_variavel(
+    "R2_ACCESS_KEY_ID",
+    obrigatoria=False
+)
 
-R2_BUCKET_NAME = os.getenv("R2_BUCKET_NAME")
+R2_SECRET_ACCESS_KEY = obter_variavel(
+    "R2_SECRET_ACCESS_KEY",
+    obrigatoria=False
+)
 
-R2_PUBLIC_URL = os.getenv("R2_PUBLIC_URL")
+R2_BUCKET_NAME = obter_variavel(
+    "R2_BUCKET_NAME",
+    obrigatoria=False
+)
+
+R2_PUBLIC_URL = obter_variavel(
+    "R2_PUBLIC_URL",
+    obrigatoria=False
+)

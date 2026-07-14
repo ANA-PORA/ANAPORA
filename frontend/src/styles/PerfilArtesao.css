@@ -1,0 +1,295 @@
+.artesao-profile-page {
+  width: 100%;
+}
+
+.artesao-profile-loading {
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.artesao-profile-success {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.artesao-profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.artesao-profile-grid {
+  display: grid;
+  grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.artesao-profile-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.artesao-profile-card {
+  background: #ffffff;
+  border: 1px solid #e5e9e6;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(30, 65, 45, 0.06);
+}
+
+.artesao-profile-preview {
+  position: sticky;
+  top: 24px;
+  text-align: center;
+}
+
+.artesao-profile-avatar {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #edf4ef;
+  color: #447457;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 52px;
+  border: 4px solid #ffffff;
+  box-shadow: 0 8px 22px rgba(30, 65, 45, 0.12);
+}
+
+.artesao-profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.artesao-profile-preview-info h2 {
+  margin: 0 0 10px;
+  font-size: 1.35rem;
+  color: #24372b;
+}
+
+.artesao-profile-preview-info p {
+  margin: 0;
+  color: #69786f;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.artesao-profile-preview-location,
+.artesao-profile-instagram-link {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.artesao-profile-preview-location {
+  color: #5f7065;
+}
+
+.artesao-profile-instagram-link {
+  color: #39724d;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.artesao-profile-instagram-link:hover {
+  color: #245a38;
+  text-decoration: underline;
+}
+
+.artesao-profile-card-title {
+  margin-bottom: 22px;
+}
+
+.artesao-profile-card-title h2 {
+  margin: 0 0 6px;
+  font-size: 1.2rem;
+  color: #24372b;
+}
+
+.artesao-profile-card-title p {
+  margin: 0;
+  color: #718077;
+}
+
+.artesao-profile-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.artesao-profile-field {
+  margin-bottom: 18px;
+}
+
+.artesao-profile-field:last-child {
+  margin-bottom: 0;
+}
+
+.artesao-profile-field small {
+  display: block;
+  margin-top: 7px;
+  color: #77837c;
+}
+
+.artesao-profile-biography {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.artesao-profile-input-icon {
+  position: relative;
+}
+
+.artesao-profile-input-icon > svg {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  z-index: 2;
+  transform: translateY(-50%);
+  color: #6b7b71;
+}
+
+.artesao-profile-input-icon .form-control {
+  padding-left: 42px;
+}
+
+.artesao-profile-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 24px;
+}
+
+.artesao-profile-submit {
+  min-height: 46px;
+  padding: 0 22px;
+  border: 0;
+  border-radius: 10px;
+  background: #34754b;
+  color: #ffffff;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.artesao-profile-submit:hover:not(:disabled) {
+  background: #28643d;
+  transform: translateY(-1px);
+}
+
+.artesao-profile-submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.artesao-profile-photo-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.artesao-profile-photo-input {
+  display: none;
+}
+
+.artesao-profile-photo-button,
+.artesao-profile-photo-remove {
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.artesao-profile-photo-button {
+  border: 0;
+  background: #34754b;
+  color: #ffffff;
+}
+
+.artesao-profile-photo-remove {
+  border: 1px solid #d8dfda;
+  background: #ffffff;
+  color: #9a3434;
+}
+
+.artesao-profile-photo-remove:disabled,
+.artesao-profile-photo-button:has(
+  + input:disabled
+) {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.artesao-profile-photo-help,
+.artesao-profile-photo-selected {
+  display: block;
+  text-align: center;
+}
+
+.artesao-profile-photo-help {
+  color: #77837c;
+}
+
+.artesao-profile-photo-selected {
+  margin-top: 5px;
+  color: #34754b;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 900px) {
+  .artesao-profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .artesao-profile-preview {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .artesao-profile-card {
+    padding: 18px;
+    border-radius: 14px;
+  }
+
+  .artesao-profile-fields {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .artesao-profile-actions {
+    position: sticky;
+    bottom: 0;
+    padding: 14px 0;
+    background: rgba(248, 250, 248, 0.94);
+    backdrop-filter: blur(8px);
+  }
+
+  .artesao-profile-submit {
+    width: 100%;
+  }
+}
