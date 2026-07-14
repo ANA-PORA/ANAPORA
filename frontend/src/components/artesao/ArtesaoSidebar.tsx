@@ -11,7 +11,6 @@ interface ArtesaoSidebarProps {
 
 export default function ArtesaoSidebar({ usuario, aberto, aoFechar, aoSair }: ArtesaoSidebarProps) {
   const primeiroNome = usuario.nome.trim().split(" ")[0];
-  const inicial = primeiroNome.charAt(0).toUpperCase();
 
   return (
     <>
