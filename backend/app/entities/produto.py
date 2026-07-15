@@ -98,3 +98,8 @@ class Produto(Base):
         cascade="all, delete-orphan",
         order_by="ProdutoImagem.ordem"
     )
+
+    itens_pedido = relationship(
+    "PedidoItem",
+    back_populates="produto"
+)

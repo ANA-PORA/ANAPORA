@@ -10,6 +10,10 @@ export default function ArtesaoLayout() {
     const { usuario, loading, logout } = useAuth();
     const [menuAberto, setMenuAberto] = useState(false);
 
+    console.log("LOADING:", loading);
+    console.log("USUÁRIO:", usuario);
+    console.log("ROLE:", usuario?.role);
+
     function sair() {
         logout();
         navigate("/login");

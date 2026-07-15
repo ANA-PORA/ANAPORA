@@ -727,13 +727,6 @@ export default function ProdutoFormulario({
               </div>
             )}
 
-            {!permitirUploadImagens &&
-              imagensAtuais.length > 0 && (
-                <small>
-                  A alteração de imagens ainda não está
-                  disponível nesta tela.
-                </small>
-              )}
           </div>
         </div>
 
