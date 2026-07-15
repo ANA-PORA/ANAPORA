@@ -246,9 +246,9 @@
     color:#333;
 }
 .new-product-submit{
-    border:0;
-    background:var(--artisan-green);
-    color:#fff;
+    border:1px solid #d8ddd5;
+    background:#fff;
+    color:#0b6311;
 }
 .new-product-submit:hover:not(:disabled){
     background:var(--artisan-green-dark);
@@ -258,11 +258,17 @@
     cursor:not-allowed;
     opacity:.6;
 }
+
+.textoBotao{
+    color: #436f16
+}
+
 @media(max-width:1100px){
     .new-product-grid{
         grid-template-columns:1fr;
     }
 }
+
 @media(max-width:650px){
     .new-product-card{
         padding:20px;

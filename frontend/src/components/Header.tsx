@@ -88,33 +88,18 @@ export default function Header() {
                         {usuario ? (
 
                             <>
-
                                 <NavLink
-                                    to="/perfil"
-                                    className="header-action"
+                                to="/artesao/perfil"
+                                className={({ isActive }) =>
+                                    `header-action ${isActive ? "active" : ""}`
+                                }
                                 >
+                                <FiUser />
 
-                                    <FiUser />
-
-                                    <span>
-
-                                        Olá, {usuario.nome.split(" ")[0]}
-
-                                    </span>
-
+                                <span>
+                                    Olá, {usuario.nome.split(" ")[0]}
+                                </span>
                                 </NavLink>
-
-                                <button
-                                    className="header-action logout-btn"
-                                    onClick={sair}
-                                >
-
-                                    <FiLogOut />
-
-                                    <span>Sair</span>
-
-                                </button>
-
                             </>
 
                         ) : (
@@ -127,9 +112,7 @@ export default function Header() {
                             >
 
                                 <FiUser />
-
                                 <span>Entrar</span>
-
                             </NavLink>
 
                         )}
@@ -146,7 +129,16 @@ export default function Header() {
                             <span>Carrinho</span>
 
                         </NavLink>
+                            <button
+                                    className="header-action logout-btn"
+                                    onClick={sair}
+                                >
 
+                                    <FiLogOut />
+
+                                    <span>Sair</span>
+
+                                </button>
                     </div>
 
                 </div>

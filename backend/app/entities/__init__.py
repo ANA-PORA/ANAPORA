@@ -1,8 +1,4 @@
 from app.entities.usuario import Usuario
-<<<<<<< Updated upstream
-from app.entities.categoria import Categoria
-from app.entities.artesao_perfil import ArtesaoPerfil
-=======
 from app.entities.artesao_perfil import ArtesaoPerfil
 from app.entities.categoria import Categoria
 from app.entities.produto import Produto
@@ -26,4 +22,4 @@ __all__ = [
     "Pedido",
     "PedidoItem",
 ]
->>>>>>> Stashed changes
+

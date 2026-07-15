@@ -3,7 +3,7 @@ import type { ChangeEvent, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import AuthLayout from "../components/AuthLayout";
-import { api } from "../services/api";
+import { login } from "../services/authService";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -26,15 +26,13 @@ export default function Login() {
     }
 
     try {
-      const response = await api.post("/auth/login", {
-        email,
-        senha,
-      });
+      
+      const response = await login(email, senha);
 
-      localStorage.setItem(
-        "token",
-        response.data.access_token
-      );
+    localStorage.setItem(
+      "token",
+      response.access_token
+    );
 
       navigate("/");
     } catch (error) {

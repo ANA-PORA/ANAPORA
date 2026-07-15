@@ -57,9 +57,6 @@ class Produto(Base):
         back_populates="produto",
         cascade="all, delete-orphan",
         order_by="ProdutoImagem.ordem"
-<<<<<<< Updated upstream
-    )
-=======
     )
     itens_carrinho = relationship(
         "CarrinhoItem",
@@ -69,4 +66,10 @@ class Produto(Base):
         "PedidoItem",
         back_populates="produto"
     )
->>>>>>> Stashed changes
+
+    )
+
+    itens_pedido = relationship(
+    "PedidoItem",
+    back_populates="produto"
+)
