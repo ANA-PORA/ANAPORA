@@ -18,8 +18,8 @@ import EditarProduto from "./pages/artesao/EditarProduto";
 import PerfilArtesao from "./pages/artesao/PerfilArtesao";
 
 import ProdutoDetalhe from "./pages/ProdutoDetalhe";
-
 import Carrinho from "./pages/Carrinho";
+import Pagamento from "./pages/Pagamento";
 
 // import DashboardArtesao from "./pages/artesao/DashboardArtesao";
 // import PedidosArtesao from "./pages/artesao/PedidosArtesao";
@@ -32,6 +32,9 @@ export default function App() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/carrinho" element={<Carrinho />} />
+
+          <Route path="/pagamento" element={<Pagamento />} />
+          
           <Route
           path="/produtos/:produtoId"
           element={<ProdutoDetalhe />}

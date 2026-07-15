@@ -33,11 +33,11 @@ class Usuario(Base):
         cascade="all, delete-orphan"
     )
 
-    pedidos = relationship(
-        "Pedido",
-        foreign_keys="Pedido.cliente_id",
-        back_populates="cliente"
-    )
+    #pedidos = relationship(
+    #    "Pedido",
+    #    foreign_keys="Pedido.cliente_id",
+    #    back_populates="cliente"
+    #)
 
     itens_vendidos = relationship(
         "PedidoItem",

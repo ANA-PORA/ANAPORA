@@ -765,14 +765,7 @@ export default function Carrinho() {
       return;
     }
 
-    setMensagem(
-      "Os produtos selecionados e o frete estão prontos. O próximo passo será implementar o checkout."
-    );
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
+    navigate("/pagamento");
   }
 
   if (carregando) {

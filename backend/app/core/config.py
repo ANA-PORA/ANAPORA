@@ -62,3 +62,8 @@ R2_PUBLIC_URL = obter_variavel(
     "R2_PUBLIC_URL",
     obrigatoria=False
 )
+
+MERCADO_PAGO_ACCESS_TOKEN = obter_variavel(
+    "MERCADO_PAGO_ACCESS_TOKEN",
+    obrigatoria=False
+)

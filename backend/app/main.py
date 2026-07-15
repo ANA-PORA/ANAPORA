@@ -55,6 +55,7 @@ app.include_router(artesao_perfil.router)
 app.include_router(carrinho_router)
 app.include_router(frete_router)
 app.include_router(pedido_router)
+app.include_router(pagamento_router)
 
 @app.get("/")
 def root():
