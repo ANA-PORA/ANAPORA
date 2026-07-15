@@ -44,9 +44,7 @@ class Usuario(Base):
         foreign_keys="PedidoItem.artesao_id",
         back_populates="artesao"
     )
-    )
-
-
+    
     pedidos = relationship(
     "Pedido",
     foreign_keys="Pedido.cliente_id",
