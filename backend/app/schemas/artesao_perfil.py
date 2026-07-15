@@ -8,6 +8,11 @@ class ArtesaoPerfilUpdate(BaseModel):
     nome_loja: Optional[str] = None
     biografia: Optional[str] = None
     telefone: Optional[str] = None
+    cep: Optional[str] = None
+    logradouro: Optional[str] = None
+    numero: Optional[str] = None
+    complemento: Optional[str] = None
+    bairro: Optional[str] = None
     cidade: Optional[str] = None
     estado: Optional[str] = None
     foto_url: Optional[str] = None
@@ -24,6 +29,11 @@ class ArtesaoPerfilResponse(BaseModel):
     nome_loja: Optional[str] = None
     biografia: Optional[str] = None
     telefone: Optional[str] = None
+    cep: Optional[str] = None
+    logradouro: Optional[str] = None
+    numero: Optional[str] = None
+    complemento: Optional[str] = None
+    bairro: Optional[str] = None
     cidade: Optional[str] = None
     estado: Optional[str] = None
     foto_url: Optional[str] = None

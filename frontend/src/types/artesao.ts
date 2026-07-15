@@ -6,6 +6,11 @@ export interface ArtesaoPerfil {
   nome_loja: string | null;
   biografia: string | null;
   telefone: string | null;
+  cep: string | null;
+  logradouro: string | null;
+  numero: string | null;
+  complemento: string | null;
+  bairro: string | null;
   cidade: string | null;
   estado: string | null;
   foto_url: string | null;
@@ -17,6 +22,11 @@ export interface AtualizarArtesaoPerfilDados {
   nome_loja?: string | null;
   biografia?: string | null;
   telefone?: string | null;
+  cep?: string | null;
+  logradouro?: string | null;
+  numero?: string | null;
+  complemento?: string | null;
+  bairro?: string | null;
   cidade?: string | null;
   estado?: string | null;
   foto_url?: string | null;

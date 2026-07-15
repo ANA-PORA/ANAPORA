@@ -1,3 +1,5 @@
+import re
+
 from sqlalchemy.orm import Session
 
 from app.entities.artesao_perfil import ArtesaoPerfil
@@ -31,6 +33,21 @@ def buscar_ou_criar(
     return perfil
 
 
+def limpar_cep(cep: str) -> str:
+    cep_limpo = re.sub(
+        r"\D",
+        "",
+        cep
+    )
+
+    if len(cep_limpo) != 8:
+        raise ValueError(
+            "O CEP deve possuir exatamente 8 números."
+        )
+
+    return cep_limpo
+
+
 def atualizar(
     db: Session,
     usuario: Usuario,
@@ -59,6 +76,27 @@ def atualizar(
             )
 
         usuario.nome = nome
+
+    if "cep" in dados_atualizacao:
+        cep = dados_atualizacao["cep"]
+
+        if cep:
+            dados_atualizacao["cep"] = limpar_cep(
+                cep
+            )
+
+    if "estado" in dados_atualizacao:
+        estado = dados_atualizacao["estado"]
+
+        if estado:
+            estado = estado.strip().upper()
+
+            if len(estado) != 2:
+                raise ValueError(
+                    "O estado deve possuir exatamente 2 letras."
+                )
+
+            dados_atualizacao["estado"] = estado
 
     for campo, valor in dados_atualizacao.items():
         if isinstance(valor, str):

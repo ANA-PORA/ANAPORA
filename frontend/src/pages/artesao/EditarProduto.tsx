@@ -21,12 +21,8 @@ export default function EditarProduto() {
   const navigate = useNavigate();
   const { produtoId } = useParams();
 
-  const [produto, setProduto] =
-    useState<Produto | null>(null);
-
-  const [carregando, setCarregando] =
-    useState(true);
-
+  const [produto, setProduto] = useState<Produto | null>(null);
+  const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState("");
 
   const id = Number(produtoId);
@@ -42,14 +38,12 @@ export default function EditarProduto() {
       try {
         setErro("");
 
-        const produtoEncontrado =
-          await buscarProdutoPorId(id);
+        const produtoEncontrado = await buscarProdutoPorId(id);
 
         setProduto(produtoEncontrado);
       } catch (error) {
         if (axios.isAxiosError(error)) {
-          const detalhe =
-            error.response?.data?.detail;
+          const detalhe = error.response?.data?.detail;
 
           setErro(
             typeof detalhe === "string"
@@ -57,16 +51,14 @@ export default function EditarProduto() {
               : "Não foi possível carregar o produto."
           );
         } else {
-          setErro(
-            "Ocorreu um erro inesperado."
-          );
+          setErro("Ocorreu um erro inesperado.");
         }
       } finally {
         setCarregando(false);
       }
     }
 
-    carregarProduto();
+    void carregarProduto();
   }, [id]);
 
   if (!produtoId) {
@@ -118,6 +110,7 @@ export default function EditarProduto() {
 
   return (
     <ProdutoFormulario
+      key={produto.id}
       titulo="Editar produto"
       subtitulo="Atualize as informações do produto."
       textoBotao="Salvar alterações"
@@ -128,14 +121,29 @@ export default function EditarProduto() {
       valoresIniciais={{
         nome: produto.nome,
         descricao: produto.descricao,
-        preco: String(produto.preco).replace(
-          ".",
-          ","
-        ),
+        preco: String(produto.preco).replace(".", ","),
         estoque: String(produto.estoque),
-        categoriaId: String(
-          produto.categoria_id
-        ),
+        pesoKg:
+          produto.peso_kg !== null &&
+          produto.peso_kg !== undefined
+            ? String(produto.peso_kg).replace(".", ",")
+            : "",
+        alturaCm:
+          produto.altura_cm !== null &&
+          produto.altura_cm !== undefined
+            ? String(produto.altura_cm).replace(".", ",")
+            : "",
+        larguraCm:
+          produto.largura_cm !== null &&
+          produto.largura_cm !== undefined
+            ? String(produto.largura_cm).replace(".", ",")
+            : "",
+        comprimentoCm:
+          produto.comprimento_cm !== null &&
+          produto.comprimento_cm !== undefined
+            ? String(produto.comprimento_cm).replace(".", ",")
+            : "",
+        categoriaId: String(produto.categoria_id),
         destaque: produto.destaque,
         ativo: produto.ativo
       }}
@@ -145,6 +153,10 @@ export default function EditarProduto() {
           descricao: dados.descricao,
           preco: dados.preco,
           estoque: dados.estoque,
+          pesoKg: dados.pesoKg,
+          alturaCm: dados.alturaCm,
+          larguraCm: dados.larguraCm,
+          comprimentoCm: dados.comprimentoCm,
           categoriaId: dados.categoriaId,
           destaque: dados.destaque,
           ativo: dados.ativo
@@ -153,8 +165,7 @@ export default function EditarProduto() {
         navigate("/artesao/produtos", {
           replace: true,
           state: {
-            mensagem:
-              "Produto atualizado com sucesso."
+            mensagem: "Produto atualizado com sucesso."
           }
         });
       }}

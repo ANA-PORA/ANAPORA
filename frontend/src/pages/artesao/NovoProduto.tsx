@@ -19,6 +19,10 @@ export default function NovoProduto() {
           descricao: dados.descricao,
           preco: dados.preco,
           estoque: dados.estoque,
+          pesoKg: dados.pesoKg,
+          alturaCm: dados.alturaCm,
+          larguraCm: dados.larguraCm,
+          comprimentoCm: dados.comprimentoCm,
           categoriaId: dados.categoriaId,
           imagens: dados.imagens
         });
@@ -26,8 +30,7 @@ export default function NovoProduto() {
         navigate("/artesao/produtos", {
           replace: true,
           state: {
-            mensagem:
-              "Produto cadastrado com sucesso."
+            mensagem: "Produto cadastrado com sucesso."
           }
         });
       }}

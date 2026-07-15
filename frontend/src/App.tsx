@@ -17,12 +17,44 @@ import NovoProduto from "./pages/artesao/NovoProduto";
 import EditarProduto from "./pages/artesao/EditarProduto";
 import PerfilArtesao from "./pages/artesao/PerfilArtesao";
 
+import ProdutoDetalhe from "./pages/ProdutoDetalhe";
+
+import Carrinho from "./pages/Carrinho";
+
+// import DashboardArtesao from "./pages/artesao/DashboardArtesao";
+// import PedidosArtesao from "./pages/artesao/PedidosArtesao";
+// import RelatorioVendas from "./pages/artesao/RelatorioVendas";
+
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/carrinho" element={<Carrinho />} />
+          <Route
+          path="/produtos/:produtoId"
+          element={<ProdutoDetalhe />}
+          />
+
+          {/* Futuras páginas públicas */}
+          {/*
+          <Route
+            path="/produtos"
+            element={<Produtos />}
+          />
+
+          <Route
+            path="/quem-somos"
+            element={<QuemSomos />}
+          />
+
+          <Route
+            path="/contato"
+            element={<Contato />}
+          />
+          */}
+
         </Route>
 
         <Route
