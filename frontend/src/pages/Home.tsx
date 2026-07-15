@@ -10,6 +10,7 @@ import {
   listarProdutos,
   listarProdutosDestaque
 } from "../services/produtoService";
+
 import type { Produto } from "../types/produto";
 
 import "../styles/Home.css";
@@ -18,7 +19,9 @@ const API_URL =
   import.meta.env.VITE_API_URL ??
   "http://localhost:8000";
 
-function resolverUrlImagem(url?: string): string | null {
+function resolverUrlImagem(
+  url?: string
+): string | null {
   if (!url) {
     return null;
   }
@@ -32,19 +35,37 @@ function resolverUrlImagem(url?: string): string | null {
     return url;
   }
 
-  const baseUrl = API_URL.replace(/\/$/, "");
-  const caminho = url.startsWith("/") ? url : `/${url}`;
+  const baseUrl =
+    API_URL.replace(/\/$/, "");
+
+  const caminho =
+    url.startsWith("/")
+      ? url
+      : `/${url}`;
 
   return `${baseUrl}${caminho}`;
 }
 
+function normalizarProdutos(
+  dados: unknown
+): Produto[] {
+  return Array.isArray(dados)
+    ? (dados as Produto[])
+    : [];
+}
+
 export default function Home() {
-  const [destaques, setDestaques] = useState<Produto[]>(
-    []
-  );
-  const [produtos, setProdutos] = useState<Produto[]>([]);
-  const [carregando, setCarregando] = useState(true);
-  const [erro, setErro] = useState("");
+  const [destaques, setDestaques] =
+    useState<Produto[]>([]);
+
+  const [produtos, setProdutos] =
+    useState<Produto[]>([]);
+
+  const [carregando, setCarregando] =
+    useState(true);
+
+  const [erro, setErro] =
+    useState("");
 
   useEffect(() => {
     let componenteAtivo = true;
@@ -54,30 +75,48 @@ export default function Home() {
         setErro("");
         setCarregando(true);
 
-        const [resultadoDestaques, resultadoProdutos] =
-          await Promise.allSettled([
-            listarProdutosDestaque(),
-            listarProdutos()
-          ]);
+        const [
+          resultadoDestaques,
+          resultadoProdutos
+        ] = await Promise.allSettled([
+          listarProdutosDestaque(),
+          listarProdutos()
+        ]);
 
         if (!componenteAtivo) {
           return;
         }
 
-        if (resultadoDestaques.status === "fulfilled") {
-          setDestaques(resultadoDestaques.value);
+        if (
+          resultadoDestaques.status ===
+          "fulfilled"
+        ) {
+          setDestaques(
+            normalizarProdutos(
+              resultadoDestaques.value
+            )
+          );
         } else {
           setDestaques([]);
+
           console.error(
             "Erro ao carregar destaques:",
             resultadoDestaques.reason
           );
         }
 
-        if (resultadoProdutos.status === "fulfilled") {
-          setProdutos(resultadoProdutos.value);
+        if (
+          resultadoProdutos.status ===
+          "fulfilled"
+        ) {
+          setProdutos(
+            normalizarProdutos(
+              resultadoProdutos.value
+            )
+          );
         } else {
           setProdutos([]);
+
           console.error(
             "Erro ao carregar produtos:",
             resultadoProdutos.reason
@@ -85,10 +124,13 @@ export default function Home() {
         }
 
         if (
-          resultadoDestaques.status === "rejected" &&
-          resultadoProdutos.status === "rejected"
+          resultadoDestaques.status ===
+            "rejected" &&
+          resultadoProdutos.status ===
+            "rejected"
         ) {
-          const motivo = resultadoProdutos.reason;
+          const motivo =
+            resultadoProdutos.reason;
 
           if (axios.isAxiosError(motivo)) {
             const detalhe =
@@ -105,12 +147,29 @@ export default function Home() {
             );
           }
         } else if (
-          resultadoDestaques.status === "rejected"
+          resultadoDestaques.status ===
+          "rejected"
         ) {
           setErro(
             "Os produtos foram carregados, mas não foi possível carregar os destaques."
           );
         }
+      } catch (erroInesperado) {
+        if (!componenteAtivo) {
+          return;
+        }
+
+        setDestaques([]);
+        setProdutos([]);
+
+        setErro(
+          "Ocorreu um erro inesperado ao carregar a página."
+        );
+
+        console.error(
+          "Erro inesperado na página inicial:",
+          erroInesperado
+        );
       } finally {
         if (componenteAtivo) {
           setCarregando(false);
@@ -118,7 +177,7 @@ export default function Home() {
       }
     }
 
-    carregarHome();
+    void carregarHome();
 
     return () => {
       componenteAtivo = false;
@@ -129,11 +188,13 @@ export default function Home() {
     <div className="home-page">
       <section className="home-hero">
         <div className="container home-hero-content">
-          <h1>Apoiando artesãos nortistas</h1>
+          <h1>
+            Apoiando artesãos nortistas
+          </h1>
 
           <p>
-            Peças feitas à mão que unem natureza, cultura
-            e identidade.
+            Peças feitas à mão que unem
+            natureza, cultura e identidade.
           </p>
 
           <NavLink
@@ -149,19 +210,30 @@ export default function Home() {
       <section className="home-benefits">
         <div className="container home-benefits-grid">
           <article>
-            <strong>Produção artesanal</strong>
-            <span>Peças únicas feitas por artesãos</span>
+            <strong>
+              Produção artesanal
+            </strong>
+
+            <span>
+              Peças únicas feitas por artesãos
+            </span>
           </article>
 
           <article>
-            <strong>Materiais naturais</strong>
+            <strong>
+              Materiais naturais
+            </strong>
+
             <span>
               Natureza transformada com respeito
             </span>
           </article>
 
           <article>
-            <strong>Entrega para todo o Brasil</strong>
+            <strong>
+              Entrega para todo o Brasil
+            </strong>
+
             <span>
               Receba sua biojoia onde estiver
             </span>
@@ -171,7 +243,10 @@ export default function Home() {
 
       <main className="container home-main">
         {erro && (
-          <div className="alert alert-warning">
+          <div
+            className="alert alert-warning"
+            role="alert"
+          >
             {erro}
           </div>
         )}
@@ -237,71 +312,98 @@ function ProductSection({
       ) : produtos.length === 0 ? (
         <div className="home-products-empty">
           <FiPackage />
-          <strong>Nenhum produto disponível</strong>
+
+          <strong>
+            Nenhum produto disponível
+          </strong>
 
           <span>
-            Os produtos cadastrados pelos artesãos
-            aparecerão aqui.
+            Os produtos cadastrados pelos
+            artesãos aparecerão aqui.
           </span>
         </div>
       ) : (
         <div className="home-products-grid">
-          {produtos.slice(0, 8).map((produto) => {
-            const imagemPrincipal = [...(
-              produto.imagens ?? []
-            )].sort(
-              (imagemA, imagemB) =>
-                imagemA.ordem - imagemB.ordem
-            )[0];
+          {produtos
+            .slice(0, 8)
+            .map((produto) => {
+              const imagens =
+                Array.isArray(produto.imagens)
+                  ? produto.imagens
+                  : [];
 
-            const urlImagem = resolverUrlImagem(
-              imagemPrincipal?.url
-            );
+              const imagemPrincipal =
+                [...imagens].sort(
+                  (imagemA, imagemB) =>
+                    imagemA.ordem -
+                    imagemB.ordem
+                )[0];
 
-            return (
-              <NavLink
-                key={produto.id}
-                to={`/produtos/${produto.id}`}
-                className="home-product-card"
-              >
-                <div className="home-product-image">
-                  {urlImagem ? (
-                    <img
-                      src={urlImagem}
-                      alt={produto.nome}
-                      loading="lazy"
-                      onError={(evento) => {
-                        evento.currentTarget.style.display =
-                          "none";
-                      }}
-                    />
-                  ) : (
-                    <FiPackage />
-                  )}
+              const urlImagem =
+                resolverUrlImagem(
+                  imagemPrincipal?.url
+                );
 
-                  {produto.destaque && (
-                    <span>Destaque</span>
-                  )}
-                </div>
+              const precoNumerico =
+                Number(
+                  String(
+                    produto.preco ?? 0
+                  ).replace(",", ".")
+                );
 
-                <div className="home-product-info">
-                  <h3>{produto.nome}</h3>
+              const precoFormatado =
+                Number.isFinite(precoNumerico)
+                  ? precoNumerico.toLocaleString(
+                      "pt-BR",
+                      {
+                        style: "currency",
+                        currency: "BRL"
+                      }
+                    )
+                  : "R$ 0,00";
 
-                  <strong>
-                    {Number(
-                      String(produto.preco).replace(
-                        ",",
-                        "."
-                      )
-                    ).toLocaleString("pt-BR", {
-                      style: "currency",
-                      currency: "BRL"
-                    })}
-                  </strong>
-                </div>
-              </NavLink>
-            );
-          })}
+              return (
+                <NavLink
+                  key={produto.id}
+                  to={`/produtos/${produto.id}`}
+                  className="home-product-card"
+                >
+                  <div className="home-product-image">
+                    {urlImagem ? (
+                      <img
+                        src={urlImagem}
+                        alt={
+                          produto.nome ||
+                          "Produto"
+                        }
+                        loading="lazy"
+                        onError={(evento) => {
+                          evento.currentTarget.style.display =
+                            "none";
+                        }}
+                      />
+                    ) : (
+                      <FiPackage />
+                    )}
+
+                    {produto.destaque && (
+                      <span>Destaque</span>
+                    )}
+                  </div>
+
+                  <div className="home-product-info">
+                    <h3>
+                      {produto.nome ||
+                        "Produto sem nome"}
+                    </h3>
+
+                    <strong>
+                      {precoFormatado}
+                    </strong>
+                  </div>
+                </NavLink>
+              );
+            })}
         </div>
       )}
     </section>

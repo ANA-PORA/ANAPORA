@@ -111,6 +111,11 @@ export default function PerfilArtesao() {
   const [nomeLoja, setNomeLoja] = useState("");
   const [biografia, setBiografia] = useState("");
   const [telefone, setTelefone] = useState("");
+  const [cep, setCep] = useState("");
+  const [logradouro, setLogradouro] = useState("");
+  const [numero, setNumero] = useState("");
+  const [complemento, setComplemento] = useState("");
+  const [bairro, setBairro] = useState("");
   const [cidade, setCidade] = useState("");
   const [estado, setEstado] = useState("");
   const [fotoUrl, setFotoUrl] = useState("");
@@ -149,6 +154,11 @@ export default function PerfilArtesao() {
         setNomeLoja(perfil.nome_loja ?? "");
         setBiografia(perfil.biografia ?? "");
         setTelefone(perfil.telefone ?? "");
+        setCep(perfil.cep ?? "");
+        setLogradouro(perfil.logradouro ?? "");
+        setNumero(perfil.numero ?? "");
+        setComplemento(perfil.complemento ?? "");
+        setBairro(perfil.bairro ?? "");
         setCidade(perfil.cidade ?? "");
         setEstado(perfil.estado ?? "");
         setFotoUrl(perfil.foto_url ?? "");
@@ -270,6 +280,11 @@ export default function PerfilArtesao() {
     const nomeTratado = nome.trim();
     const nomeLojaTratado = nomeLoja.trim();
     const biografiaTratada = biografia.trim();
+    const cepTratado = cep.replace(/\D/g, "");
+    const logradouroTratado = logradouro.trim();
+    const numeroTratado = numero.trim();
+    const complementoTratado = complemento.trim();
+    const bairroTratado = bairro.trim();
     const cidadeTratada = cidade.trim();
     const telefoneTratado = telefone.trim();
     const instagramTratado =
@@ -299,6 +314,26 @@ export default function PerfilArtesao() {
       return;
     }
 
+    if (cepTratado && cepTratado.length !== 8) {
+      setErro("O CEP deve possuir exatamente 8 números.");
+      return;
+    }
+
+    if (cepTratado && !logradouroTratado) {
+      setErro("Informe o logradouro do endereço.");
+      return;
+    }
+
+    if (cepTratado && !numeroTratado) {
+      setErro("Informe o número do endereço.");
+      return;
+    }
+
+    if (cepTratado && !bairroTratado) {
+      setErro("Informe o bairro do endereço.");
+      return;
+    }
+
     if (cidadeTratada && !estado) {
       setErro(
         "Selecione o estado correspondente à cidade."
@@ -322,6 +357,11 @@ export default function PerfilArtesao() {
           nome_loja: nomeLojaTratado || null,
           biografia: biografiaTratada || null,
           telefone: telefoneTratado || null,
+          cep: cepTratado || null,
+          logradouro: logradouroTratado || null,
+          numero: numeroTratado || null,
+          complemento: complementoTratado || null,
+          bairro: bairroTratado || null,
           cidade: cidadeTratada || null,
           estado: estado || null,
           instagram: instagramTratado || null
@@ -355,6 +395,15 @@ export default function PerfilArtesao() {
       setTelefone(
         perfilAtualizado.telefone ?? ""
       );
+      setCep(perfilAtualizado.cep ?? "");
+      setLogradouro(
+        perfilAtualizado.logradouro ?? ""
+      );
+      setNumero(perfilAtualizado.numero ?? "");
+      setComplemento(
+        perfilAtualizado.complemento ?? ""
+      );
+      setBairro(perfilAtualizado.bairro ?? "");
       setCidade(perfilAtualizado.cidade ?? "");
       setEstado(perfilAtualizado.estado ?? "");
       setInstagram(
@@ -703,6 +752,134 @@ export default function PerfilArtesao() {
                       )
                     )}
                   </select>
+                </div>
+              </div>
+            </div>
+
+            <div className="artesao-profile-card">
+              <div className="artesao-profile-card-title">
+                <h2>Endereço de origem</h2>
+
+                <p>
+                  Este endereço será usado para calcular o
+                  frete dos produtos vendidos.
+                </p>
+              </div>
+
+              <div className="artesao-profile-fields">
+                <div className="artesao-profile-field">
+                  <label
+                    htmlFor="artesao-cep"
+                    className="form-label"
+                  >
+                    CEP
+                  </label>
+
+                  <input
+                    id="artesao-cep"
+                    type="text"
+                    inputMode="numeric"
+                    className="form-control"
+                    value={cep}
+                    onChange={(evento) =>
+                      setCep(
+                        evento.target.value
+                          .replace(/\D/g, "")
+                          .slice(0, 8)
+                      )
+                    }
+                    maxLength={8}
+                    placeholder="69000000"
+                    disabled={salvando}
+                  />
+                </div>
+
+                <div className="artesao-profile-field">
+                  <label
+                    htmlFor="artesao-logradouro"
+                    className="form-label"
+                  >
+                    Logradouro
+                  </label>
+
+                  <input
+                    id="artesao-logradouro"
+                    type="text"
+                    className="form-control"
+                    value={logradouro}
+                    onChange={(evento) =>
+                      setLogradouro(evento.target.value)
+                    }
+                    maxLength={150}
+                    placeholder="Rua, avenida ou comunidade"
+                    disabled={salvando}
+                  />
+                </div>
+
+                <div className="artesao-profile-field">
+                  <label
+                    htmlFor="artesao-numero"
+                    className="form-label"
+                  >
+                    Número
+                  </label>
+
+                  <input
+                    id="artesao-numero"
+                    type="text"
+                    className="form-control"
+                    value={numero}
+                    onChange={(evento) =>
+                      setNumero(evento.target.value)
+                    }
+                    maxLength={20}
+                    placeholder="Ex.: 123 ou S/N"
+                    disabled={salvando}
+                  />
+                </div>
+
+                <div className="artesao-profile-field">
+                  <label
+                    htmlFor="artesao-complemento"
+                    className="form-label"
+                  >
+                    Complemento
+                  </label>
+
+                  <input
+                    id="artesao-complemento"
+                    type="text"
+                    className="form-control"
+                    value={complemento}
+                    onChange={(evento) =>
+                      setComplemento(evento.target.value)
+                    }
+                    maxLength={100}
+                    placeholder="Opcional"
+                    disabled={salvando}
+                  />
+                </div>
+
+                <div className="artesao-profile-field">
+                  <label
+                    htmlFor="artesao-bairro"
+                    className="form-label"
+                  >
+                    Bairro
+                  </label>
+
+                  <input
+                    id="artesao-bairro"
+                    type="text"
+                    className="form-control"
+                    value={bairro}
+                    onChange={(evento) =>
+                      setBairro(evento.target.value)
+                    }
+                    maxLength={100}
+                    placeholder="Ex.: Centro"
+                    disabled={salvando}
+                  />
                 </div>
               </div>
             </div>

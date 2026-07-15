@@ -10,6 +10,12 @@ export interface Produto {
   descricao: string;
   preco: number | string;
   estoque: number;
+
+  peso_kg: number | string | null;
+  altura_cm: number | string | null;
+  largura_cm: number | string | null;
+  comprimento_cm: number | string | null;
+
   categoria_id: number;
   artesao_id: number;
   destaque: boolean;
@@ -24,6 +30,12 @@ export interface CriarProdutoDados {
   descricao: string;
   preco: number;
   estoque: number;
+
+  pesoKg?: number;
+  alturaCm?: number;
+  larguraCm?: number;
+  comprimentoCm?: number;
+
   categoriaId: number;
   imagens: File[];
 }
@@ -33,6 +45,12 @@ export interface EditarProdutoDados {
   descricao: string;
   preco: number;
   estoque: number;
+
+  pesoKg?: number;
+  alturaCm?: number;
+  larguraCm?: number;
+  comprimentoCm?: number;
+
   categoriaId: number;
   destaque: boolean;
   ativo: boolean;

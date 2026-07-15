@@ -1,24 +1,29 @@
 import { api } from "./api";
+
 import type {
   CriarProdutoDados,
   EditarProdutoDados,
   Produto
 } from "../types/produto";
 
+
 export async function listarMeusProdutos(): Promise<Produto[]> {
   const response = await api.get<Produto[]>("/produtos/meus");
   return response.data;
 }
+
 
 export async function listarProdutos(): Promise<Produto[]> {
   const response = await api.get<Produto[]>("/produtos");
   return response.data;
 }
 
+
 export async function listarProdutosDestaque(): Promise<Produto[]> {
   const response = await api.get<Produto[]>("/produtos/destaques");
   return response.data;
 }
+
 
 export async function buscarProdutoPorId(
   produtoId: number
@@ -26,8 +31,10 @@ export async function buscarProdutoPorId(
   const response = await api.get<Produto>(
     `/produtos/${produtoId}`
   );
+
   return response.data;
 }
+
 
 export async function listarProdutosPorCategoria(
   categoriaId: number
@@ -35,8 +42,10 @@ export async function listarProdutosPorCategoria(
   const response = await api.get<Produto[]>(
     `/produtos/categoria/${categoriaId}`
   );
+
   return response.data;
 }
+
 
 export async function pesquisarProdutos(
   texto: string
@@ -49,8 +58,21 @@ export async function pesquisarProdutos(
       }
     }
   );
+
   return response.data;
 }
+
+
+function adicionarCampoOpcional(
+  formData: FormData,
+  nome: string,
+  valor?: number
+): void {
+  if (valor !== undefined) {
+    formData.append(nome, valor.toString());
+  }
+}
+
 
 export async function criarProduto(
   dados: CriarProdutoDados
@@ -61,10 +83,36 @@ export async function criarProduto(
   formData.append("descricao", dados.descricao);
   formData.append("preco", dados.preco.toString());
   formData.append("estoque", dados.estoque.toString());
+
+  adicionarCampoOpcional(
+    formData,
+    "peso_kg",
+    dados.pesoKg
+  );
+
+  adicionarCampoOpcional(
+    formData,
+    "altura_cm",
+    dados.alturaCm
+  );
+
+  adicionarCampoOpcional(
+    formData,
+    "largura_cm",
+    dados.larguraCm
+  );
+
+  adicionarCampoOpcional(
+    formData,
+    "comprimento_cm",
+    dados.comprimentoCm
+  );
+
   formData.append(
     "categoria_id",
     dados.categoriaId.toString()
   );
+
   formData.append("destaque", "false");
   formData.append("ativo", "true");
 
@@ -80,6 +128,7 @@ export async function criarProduto(
   return response.data;
 }
 
+
 export async function atualizarProduto(
   produtoId: number,
   dados: EditarProdutoDados
@@ -90,12 +139,45 @@ export async function atualizarProduto(
   formData.append("descricao", dados.descricao);
   formData.append("preco", dados.preco.toString());
   formData.append("estoque", dados.estoque.toString());
+
+  adicionarCampoOpcional(
+    formData,
+    "peso_kg",
+    dados.pesoKg
+  );
+
+  adicionarCampoOpcional(
+    formData,
+    "altura_cm",
+    dados.alturaCm
+  );
+
+  adicionarCampoOpcional(
+    formData,
+    "largura_cm",
+    dados.larguraCm
+  );
+
+  adicionarCampoOpcional(
+    formData,
+    "comprimento_cm",
+    dados.comprimentoCm
+  );
+
   formData.append(
     "categoria_id",
     dados.categoriaId.toString()
   );
-  formData.append("destaque", dados.destaque.toString());
-  formData.append("ativo", dados.ativo.toString());
+
+  formData.append(
+    "destaque",
+    dados.destaque.toString()
+  );
+
+  formData.append(
+    "ativo",
+    dados.ativo.toString()
+  );
 
   const response = await api.put<Produto>(
     `/produtos/${produtoId}`,
@@ -104,6 +186,7 @@ export async function atualizarProduto(
 
   return response.data;
 }
+
 
 export async function removerProduto(
   produtoId: number

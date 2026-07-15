@@ -17,6 +17,13 @@ import NovoProduto from "./pages/artesao/NovoProduto";
 import EditarProduto from "./pages/artesao/EditarProduto";
 import PerfilArtesao from "./pages/artesao/PerfilArtesao";
 
+<<<<<<< Updated upstream
+=======
+import ProdutoDetalhe from "./pages/ProdutoDetalhe";
+
+import Carrinho from "./pages/Carrinho";
+
+>>>>>>> Stashed changes
 // import DashboardArtesao from "./pages/artesao/DashboardArtesao";
 // import PedidosArtesao from "./pages/artesao/PedidosArtesao";
 // import RelatorioVendas from "./pages/artesao/RelatorioVendas";
@@ -28,6 +35,14 @@ export default function App() {
         {/* Páginas públicas com navbar e footer */}
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
+<<<<<<< Updated upstream
+=======
+          <Route path="/carrinho" element={<Carrinho />} />
+          <Route
+          path="/produtos/:produtoId"
+          element={<ProdutoDetalhe />}
+          />
+>>>>>>> Stashed changes
 
           {/* Futuras páginas públicas */}
           {/*

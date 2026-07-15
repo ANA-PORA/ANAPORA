@@ -38,6 +38,31 @@ class ArtesaoPerfil(Base):
         String(20),
         nullable=True
     )
+    
+    cep = Column(
+        String(9),
+        nullable=True
+    )
+
+    logradouro = Column(
+        String(150),
+        nullable=True
+    )
+
+    numero = Column(
+        String(20),
+        nullable=True
+    )
+
+    complemento = Column(
+        String(100),
+        nullable=True
+    )
+
+    bairro = Column(
+        String(100),
+        nullable=True
+    )
 
     cidade = Column(
         String(100),
@@ -65,6 +90,6 @@ class ArtesaoPerfil(Base):
     )
 
     foto_nome_arquivo = Column(
-    String(500),
-    nullable=True
-)
+        String(500),
+        nullable=True
+        )
