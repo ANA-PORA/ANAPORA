@@ -23,7 +23,10 @@ from app.controllers.categoria_controller import router as categoria_router
 from app.controllers.frete_controller import router as frete_router
 from app.controllers.pedido_controller import router as pedido_router
 from app.controllers.produto_controller import router as produto_router
-from app.controllers.pagamento_controller import router as pagamento_router
+
+from app.entities.pedido import Pedido
+from app.entities.pedido_item import PedidoItem
+from app.controllers.pedido_controller import router as pedido_router
 
 Base.metadata.create_all(bind=engine)
 
@@ -53,7 +56,6 @@ app.include_router(carrinho_router)
 app.include_router(frete_router)
 app.include_router(pedido_router)
 app.include_router(pagamento_router)
-
 
 @app.get("/")
 def root():

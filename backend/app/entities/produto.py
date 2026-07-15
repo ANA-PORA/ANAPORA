@@ -62,7 +62,12 @@ class Produto(Base):
         "CarrinhoItem",
         back_populates="produto"
     )
-    #itens_pedido = relationship(
-    #    "PedidoItem",
-    #    back_populates="produto"
-    #)
+    itens_pedido = relationship(
+        "PedidoItem",
+        back_populates="produto"
+    )
+
+    itens_pedido = relationship(
+    "PedidoItem",
+    back_populates="produto"
+)

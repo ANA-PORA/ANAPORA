@@ -27,6 +27,7 @@ export default function Header() {
 
     navigate(
       `/produtos?busca=${encodeURIComponent(termo)}`
+
     );
   }
 

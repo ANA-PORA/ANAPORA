@@ -16,6 +16,7 @@ import MeusProdutos from "./pages/artesao/MeusProdutos";
 import NovoProduto from "./pages/artesao/NovoProduto";
 import EditarProduto from "./pages/artesao/EditarProduto";
 import PerfilArtesao from "./pages/artesao/PerfilArtesao";
+
 import ProdutoDetalhe from "./pages/ProdutoDetalhe";
 import Carrinho from "./pages/Carrinho";
 import Pagamento from "./pages/Pagamento";
@@ -28,7 +29,6 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Páginas públicas com navbar e footer */}
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/carrinho" element={<Carrinho />} />
@@ -57,34 +57,17 @@ export default function App() {
             element={<Contato />}
           />
           */}
+
         </Route>
 
-        {/* Área do artesão */}
         <Route
           path="/artesao"
           element={<ArtesaoLayout />}
         >
-          {/* Enquanto o dashboard não existe,
-              redireciona para Meus Produtos */}
           <Route
             index
-            element={
-              <Navigate
-                to="produtos"
-                replace
-              />
-            }
+            element={<Navigate to="produtos" replace />}
           />
-
-          {/* Quando o dashboard estiver pronto,
-              remova o redirecionamento acima
-              e use esta rota:
-
-          <Route
-            index
-            element={<DashboardArtesao />}
-          />
-          */}
 
           <Route
             path="produtos"
@@ -105,21 +88,8 @@ export default function App() {
             path="perfil"
             element={<PerfilArtesao />}
           />
-
-          {/*
-          <Route
-            path="pedidos"
-            element={<PedidosArtesao />}
-          />
-
-          <Route
-            path="relatorios"
-            element={<RelatorioVendas />}
-          />
-          */}
         </Route>
 
-        {/* Autenticação sem MainLayout */}
         <Route
           path="/login"
           element={<Login />}
@@ -130,15 +100,9 @@ export default function App() {
           element={<Cadastro />}
         />
 
-        {/* Página não encontrada */}
         <Route
           path="*"
-          element={
-            <Navigate
-              to="/"
-              replace
-            />
-          }
+          element={<Navigate to="/" replace />}
         />
       </Routes>
     </BrowserRouter>
