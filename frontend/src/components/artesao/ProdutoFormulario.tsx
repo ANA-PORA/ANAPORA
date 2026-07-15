@@ -16,10 +16,8 @@ import {
   FiTrash2,
   FiUploadCloud
 } from "react-icons/fi";
-
 import { useCategorias } from "../../hooks/useCategorias";
 import type { ProdutoImagem } from "../../types/produto";
-
 import "../../styles/NovoProduto.css";
 
 interface ImagemPreview {
@@ -32,17 +30,25 @@ export interface ProdutoFormularioDados {
   descricao: string;
   preco: number;
   estoque: number;
+  pesoKg?: number;
+  alturaCm?: number;
+  larguraCm?: number;
+  comprimentoCm?: number;
   categoriaId: number;
   imagens: File[];
   destaque: boolean;
   ativo: boolean;
 }
 
-interface ProdutoFormularioValoresIniciais {
+export interface ProdutoFormularioValoresIniciais {
   nome: string;
   descricao: string;
   preco: string;
   estoque: string;
+  pesoKg: string;
+  alturaCm: string;
+  larguraCm: string;
+  comprimentoCm: string;
   categoriaId: string;
   destaque: boolean;
   ativo: boolean;
@@ -68,6 +74,10 @@ const VALORES_PADRAO: ProdutoFormularioValoresIniciais = {
   descricao: "",
   preco: "",
   estoque: "",
+  pesoKg: "",
+  alturaCm: "",
+  larguraCm: "",
+  comprimentoCm: "",
   categoriaId: "",
   destaque: false,
   ativo: true
@@ -81,6 +91,24 @@ const TIPOS_PERMITIDOS = [
 
 const TAMANHO_MAXIMO = 5 * 1024 * 1024;
 const MAXIMO_IMAGENS = 8;
+
+function converterNumeroOpcional(
+  valor: string
+): number | undefined {
+  const valorFormatado = valor.trim().replace(",", ".");
+
+  if (!valorFormatado) {
+    return undefined;
+  }
+
+  const numero = Number(valorFormatado);
+
+  if (!Number.isFinite(numero)) {
+    return undefined;
+  }
+
+  return numero;
+}
 
 export default function ProdutoFormulario({
   titulo,
@@ -117,6 +145,21 @@ export default function ProdutoFormulario({
     valoresIniciais.estoque
   );
 
+  const [pesoKg, setPesoKg] = useState(
+    valoresIniciais.pesoKg
+  );
+
+  const [alturaCm, setAlturaCm] = useState(
+    valoresIniciais.alturaCm
+  );
+
+  const [larguraCm, setLarguraCm] = useState(
+    valoresIniciais.larguraCm
+  );
+
+  const [comprimentoCm, setComprimentoCm] =
+    useState(valoresIniciais.comprimentoCm);
+
   const [categoriaId, setCategoriaId] = useState(
     valoresIniciais.categoriaId
   );
@@ -141,6 +184,12 @@ export default function ProdutoFormulario({
     setDescricao(valoresIniciais.descricao);
     setPreco(valoresIniciais.preco);
     setEstoque(valoresIniciais.estoque);
+    setPesoKg(valoresIniciais.pesoKg);
+    setAlturaCm(valoresIniciais.alturaCm);
+    setLarguraCm(valoresIniciais.larguraCm);
+    setComprimentoCm(
+      valoresIniciais.comprimentoCm
+    );
     setCategoriaId(valoresIniciais.categoriaId);
     setDestaque(valoresIniciais.destaque);
     setAtivo(valoresIniciais.ativo);
@@ -149,6 +198,10 @@ export default function ProdutoFormulario({
     valoresIniciais.descricao,
     valoresIniciais.preco,
     valoresIniciais.estoque,
+    valoresIniciais.pesoKg,
+    valoresIniciais.alturaCm,
+    valoresIniciais.larguraCm,
+    valoresIniciais.comprimentoCm,
     valoresIniciais.categoriaId,
     valoresIniciais.destaque,
     valoresIniciais.ativo
@@ -269,6 +322,18 @@ export default function ProdutoFormulario({
     const estoqueNumerico = Number(estoque);
     const categoriaNumerica = Number(categoriaId);
 
+    const pesoNumerico =
+      converterNumeroOpcional(pesoKg);
+
+    const alturaNumerica =
+      converterNumeroOpcional(alturaCm);
+
+    const larguraNumerica =
+      converterNumeroOpcional(larguraCm);
+
+    const comprimentoNumerico =
+      converterNumeroOpcional(comprimentoCm);
+
     if (
       !nome.trim() ||
       !descricao.trim() ||
@@ -325,6 +390,50 @@ export default function ProdutoFormulario({
     }
 
     if (
+      pesoKg.trim() &&
+      (pesoNumerico === undefined ||
+        pesoNumerico <= 0)
+    ) {
+      setErro(
+        "Informe um peso válido e maior que zero."
+      );
+      return;
+    }
+
+    if (
+      alturaCm.trim() &&
+      (alturaNumerica === undefined ||
+        alturaNumerica <= 0)
+    ) {
+      setErro(
+        "Informe uma altura válida e maior que zero."
+      );
+      return;
+    }
+
+    if (
+      larguraCm.trim() &&
+      (larguraNumerica === undefined ||
+        larguraNumerica <= 0)
+    ) {
+      setErro(
+        "Informe uma largura válida e maior que zero."
+      );
+      return;
+    }
+
+    if (
+      comprimentoCm.trim() &&
+      (comprimentoNumerico === undefined ||
+        comprimentoNumerico <= 0)
+    ) {
+      setErro(
+        "Informe um comprimento válido e maior que zero."
+      );
+      return;
+    }
+
+    if (
       exigirImagem &&
       imagensAtuais.length === 0 &&
       imagens.length === 0
@@ -341,6 +450,10 @@ export default function ProdutoFormulario({
         descricao: descricao.trim(),
         preco: precoNumerico,
         estoque: estoqueNumerico,
+        pesoKg: pesoNumerico,
+        alturaCm: alturaNumerica,
+        larguraCm: larguraNumerica,
+        comprimentoCm: comprimentoNumerico,
         categoriaId: categoriaNumerica,
         imagens: permitirUploadImagens
           ? imagens.map((imagem) => imagem.arquivo)
@@ -552,6 +665,109 @@ export default function ProdutoFormulario({
                 )}
             </div>
 
+            <div className="mt-4">
+              <div className="new-product-card-title">
+                <h2>Peso e dimensões</h2>
+
+                <p>
+                  Essas informações serão utilizadas no
+                  cálculo do frete.
+                </p>
+              </div>
+
+              <div className="new-product-fields">
+                <div>
+                  <label
+                    htmlFor="produto-peso"
+                    className="form-label"
+                  >
+                    Peso (kg)
+                  </label>
+
+                  <input
+                    id="produto-peso"
+                    type="text"
+                    inputMode="decimal"
+                    className="form-control"
+                    value={pesoKg}
+                    onChange={(evento) =>
+                      setPesoKg(evento.target.value)
+                    }
+                    placeholder="Ex.: 0,250"
+                    disabled={enviando}
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="produto-altura"
+                    className="form-label"
+                  >
+                    Altura (cm)
+                  </label>
+
+                  <input
+                    id="produto-altura"
+                    type="text"
+                    inputMode="decimal"
+                    className="form-control"
+                    value={alturaCm}
+                    onChange={(evento) =>
+                      setAlturaCm(evento.target.value)
+                    }
+                    placeholder="Ex.: 5"
+                    disabled={enviando}
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="produto-largura"
+                    className="form-label"
+                  >
+                    Largura (cm)
+                  </label>
+
+                  <input
+                    id="produto-largura"
+                    type="text"
+                    inputMode="decimal"
+                    className="form-control"
+                    value={larguraCm}
+                    onChange={(evento) =>
+                      setLarguraCm(evento.target.value)
+                    }
+                    placeholder="Ex.: 10"
+                    disabled={enviando}
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="produto-comprimento"
+                    className="form-label"
+                  >
+                    Comprimento (cm)
+                  </label>
+
+                  <input
+                    id="produto-comprimento"
+                    type="text"
+                    inputMode="decimal"
+                    className="form-control"
+                    value={comprimentoCm}
+                    onChange={(evento) =>
+                      setComprimentoCm(
+                        evento.target.value
+                      )
+                    }
+                    placeholder="Ex.: 15"
+                    disabled={enviando}
+                  />
+                </div>
+              </div>
+            </div>
+
             {mostrarStatus && (
               <div className="mt-4">
                 <div className="new-product-card-title">
@@ -726,7 +942,6 @@ export default function ProdutoFormulario({
                   })}
               </div>
             )}
-
           </div>
         </div>
 
