@@ -17,15 +17,13 @@ from app.entities import (
     Usuario,
 )
 from app.controllers import artesao_perfil
-<<<<<<< Updated upstream
-=======
 from app.controllers.auth_controller import router as auth_router
 from app.controllers.carrinho_controller import router as carrinho_router
 from app.controllers.categoria_controller import router as categoria_router
 from app.controllers.frete_controller import router as frete_router
 from app.controllers.pedido_controller import router as pedido_router
 from app.controllers.produto_controller import router as produto_router
->>>>>>> Stashed changes
+from app.controllers.pagamento_controller import router as pagamento_router
 
 Base.metadata.create_all(bind=engine)
 
@@ -51,14 +49,12 @@ app.include_router(auth_router)
 app.include_router(categoria_router)
 app.include_router(produto_router)
 app.include_router(artesao_perfil.router)
-<<<<<<< Updated upstream
-=======
 app.include_router(carrinho_router)
 app.include_router(frete_router)
 app.include_router(pedido_router)
+app.include_router(pagamento_router)
 
 
->>>>>>> Stashed changes
 @app.get("/")
 def root():
     return {"message": "API ANAPORA funcionando!"}

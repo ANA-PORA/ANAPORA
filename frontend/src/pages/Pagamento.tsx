@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { api } from "../services/api";
 
 import {
   FiArrowLeft,
@@ -20,6 +21,18 @@ export default function Pagamento() {
 
   const [metodo, setMetodo] =
     useState<MetodoPagamento>("pix");
+
+  const finalizarPagamento = async () => {
+    try {
+      const response = await api.post("/pagamento/checkout");
+
+      window.location.href = response.data.init_point;
+    } catch (error: any) {
+        console.log(error.response);
+        console.log(error.response?.data);
+      alert(JSON.stringify(error.response?.data));
+    }
+    };
 
   return (
     <section className="pagamento-page">
@@ -88,6 +101,7 @@ export default function Pagamento() {
 
                 <button
                   className="btn btn-success w-100 mt-4"
+                  onClick={finalizarPagamento}
                 >
                   Finalizar Pagamento
                 </button>
