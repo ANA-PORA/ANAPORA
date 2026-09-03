@@ -4,7 +4,7 @@ Plataforma web full stack focada no e-commerce de artesanatos e biojoias amazôn
 
 ## 🛠️ Tecnologias Principais
 *   **Backend:** Python (FastAPI), SQLAlchemy, Uvicorn
-*   **Frontend:** React.js, CSS3
+*   **Frontend:** React.ts, CSS3
 *   **Infraestrutura:** PostgreSQL, Docker Compose
 
 ## 🚀 Funcionalidades
